@@ -1,1 +1,2 @@
-from .book import BookModel
+from .book import Book
+from .user import User

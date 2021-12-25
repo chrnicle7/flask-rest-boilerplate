@@ -1,9 +1,9 @@
 """
     Libraries
 """
-from flask import jsonify, make_response
+from flask import jsonify
 from flask_restful import Resource, reqparse
-from models import BookModel
+from models import Book
 
 """
     Parser 
@@ -21,7 +21,7 @@ class BookResource(Resource):
 
     def get(self, id):
         try:
-            book = BookModel.find_by_id(id)
+            book = Book.find_by_id(id)
         except Exception as e:
             return jsonify({"error": "Invalid form"}), 400
         
@@ -29,7 +29,7 @@ class BookResource(Resource):
 
     def put(self, id):
         try:
-            book = BookModel.find_by_id(id)
+            book = Book.find_by_id(id)
         except:
             return jsonify({"error": "Can't find the book with id " + id}), 404
 
@@ -47,7 +47,7 @@ class BookResource(Resource):
 
     def delete(self, id):
         try:
-            book = BookModel.find_by_id(id)
+            book = Book.find_by_id(id)
         except Exception as e:
             return jsonify({"error": "Can't find the book with id " + id}), 404
 
@@ -62,11 +62,11 @@ class BookResource(Resource):
 class BooksResource(Resource):
 
     def get(self):
-        return {"books": list(map(lambda b: b.json(), BookModel.query.all()))}
+        return {"books": list(map(lambda b: b.json(), Book.query.all()))}
 
     def post(self):
         args = parser.parse_args()
-        book = BookModel(
+        book = Book(
             title=args["title"],
             year=args["year"],
             author=args["author"],

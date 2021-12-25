@@ -1,6 +1,6 @@
 from main import db
 
-class BookModel(db.Model):
+class Book(db.Model):
     __tablename__ = "books"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -22,7 +22,7 @@ class BookModel(db.Model):
         return arg
 
     def json(self):
-        return {"title": self.title, "year": self.year, "author": self.author, "publisher": self.publisher}
+        return {"id": self.id, "title": self.title, "year": self.year, "author": self.author, "publisher": self.publisher}
 
     @classmethod
     def find_by_id(cls, id):
@@ -30,7 +30,7 @@ class BookModel(db.Model):
 
     def find_by_name(cls, name):
         search = "%{}%".format(name)
-        return cls.query.filter_by(name=BookModel.name.like(search)).all()
+        return cls.query.filter_by(name=Book.name.like(search)).all()
         
     def save_to_db(self):
         db.session.add(self)

@@ -1,10 +1,8 @@
+from decouple import config
+
 """
     Database configuration
 """
-
-from decouple import config
-
-# Develompent env
 POSTGRES_DEV = {
     "user"          : config('DB_USERNAME'),
     "password"      : config('DB_PASSWORD'),
@@ -13,3 +11,10 @@ POSTGRES_DEV = {
     "db"            : config('DB_DATABASE'),
 }
 DB_URL_DEV = "postgresql://%(user)s:%(password)s@%(host)s:%(port)s/%(db)s" % POSTGRES_DEV
+
+
+
+"""
+    JWT configuration
+"""
+JWT_SECRET_KEY = config('JWT_SECRET_KEY')
