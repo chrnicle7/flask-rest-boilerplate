@@ -8,7 +8,7 @@ class User(db.Model):
     email = db.Column(db.String(50))
     password = db.Column(db.String(200))
     address = db.Column(db.String(500))
-    role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
+    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     
     def __init__(self, id, name, email, password, address, role_id):
         self.id = id
@@ -25,7 +25,7 @@ class User(db.Model):
         return arg
 
     def json(self):
-        return {"id": self.id, "name": self.name, "address": self.address, "role_id": self.role_id}
+        return {"id": self.id, "name": self.name, "email": self.email, "address": self.address, "role_id": self.role_id}
 
     @classmethod
     def find_by_id(cls, id):

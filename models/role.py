@@ -1,7 +1,7 @@
 from main import db
 
 class Role(db.Model):
-    _tablename__ = "roles"
+    __tablename__ = "roles"
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(200))
